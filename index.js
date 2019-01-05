@@ -13,8 +13,15 @@ app.get('/', (req, res, next) => {
 app.post('/', (req, res, next) => {
     let crypto = req.body.crypto
     let fiat = req.body.fiat
+
+    let baseURL = 'https://apiv2.bitcoinaverage.com/convert/global'
+
+    let options = {
+        url: baseURL,
+
+    }
     
-    request(`https://apiv2.bitcoinaverage.com/indices/global/ticker/${crypto+fiat}`, (error, response, body) => {
+    request(options, (error, response, body) => {
         const data = JSON.parse(body)
         let price = data.last
 
